@@ -1,0 +1,2 @@
+[rails]
+rails-01 ansible_host=x.x.x.x

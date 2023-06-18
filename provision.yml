@@ -1,0 +1,17 @@
+---
+- hosts: all
+  roles:
+    - role: packages
+      tags: ["system", "packages"]
+    - role: sshd_config
+      tags: ["system", "ssh"]
+    - role: docker
+      tags: ["system", "docker"]
+    - role: user
+      tags: [ "system", "user" ]
+    - role: redis
+      tags: [ "system", "redis" ]
+    - role: mariadb
+      tags: [ "system", "mariadb" ]
+    - role: guvnor
+      tags: ["system", "guvnor"]

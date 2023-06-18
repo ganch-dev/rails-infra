@@ -1,0 +1,37 @@
+---
+- name: "Create the '{{ vault_ssh_user_name }}' user"
+  user:
+    name: "{{ vault_ssh_user_name }}"
+    state: present
+    createhome: yes
+    shell: /bin/bash
+    password: "{{ vault_ssh_user_password | password_hash('sha512') }}"
+
+- name: "Add the '{{ vault_ssh_user_name }}' user to the sudo and docker groups"
+  user:
+    name: "{{ vault_ssh_user_name }}"
+    groups: sudo,docker
+    append: yes
+
+- name: "Add '{{ vault_ssh_user_name }}' to /etc/sudoers.d"
+  copy:
+    dest: "/etc/sudoers.d/z-{{ vault_ssh_user_name }}"
+    content: "%{{ vault_ssh_user_name }} ALL=(ALL) PASSWD:ALL"
+  become: true
+
+- name: Create .ssh folder
+  file:
+    path: "~{{ vault_ssh_user_name }}/.ssh"
+    state: directory
+    owner: "{{ vault_ssh_user_name }}"
+    group: "{{ vault_ssh_user_name }}"
+    mode: 0700
+
+- name: "Copy authorized_keys to the '{{ vault_ssh_user_name }}' user's home directory"
+  copy:
+    src: /root/.ssh/authorized_keys
+    dest: "/home/{{ vault_ssh_user_name }}/.ssh/authorized_keys"
+    remote_src: yes
+    owner: "{{ vault_ssh_user_name }}"
+    group: "{{ vault_ssh_user_name }}"
+    mode: '0600'

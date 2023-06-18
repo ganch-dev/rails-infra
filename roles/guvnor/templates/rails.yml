@@ -1,0 +1,45 @@
+defaults:
+  image: {{ app_image }}
+  imageTag: {{ app_image_tag }}
+#  mounts:
+#    - host: /opt/rails/data/dist
+#      container: /opt/rails/app/resource/dist
+  network:
+    mode: host
+
+processes:
+  web:
+    command: ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+    env:
+      RAILS_SERVE_STATIC_FILES: '1'
+    caddy:
+      hostnames:
+        - {{ app_hostname }}
+    readyCheck:
+      frequency: 2s
+      maximum: 60
+      http:
+        expectedStatus: 200
+        path: /
+        headers:
+          - name: Host
+            value: {{ app_hostname }}
+
+#  cron:
+#    command: ["bundle", "exec", "clockwork", "config/cron.rb"]
+#    deploymentStrategy: replace
+#
+#  worker_main:
+#    command: ["bundle", "exec", "sidekiq"]
+#    quantity: 2
+
+tasks:
+  migrate:
+    command: ["bundle", "exec", "rake", "db:migrate"]
+
+  console:
+    command: ["bundle", "exec", "rails", "console"]
+    interactive: true
+
+callbacks:
+  preDeployment: [migrate]

@@ -1,0 +1,26 @@
+---
+- name: Create MariaDB directory
+  file:
+    path: /opt/mariadb
+    state: directory
+
+- name: Create run.sh script
+  template:
+    src: templates/run.sh
+    dest: /opt/mariadb/run.sh
+    owner: root
+    group: root
+    mode: u+rwx,g=,o=
+
+- name: Create console.sh script
+  template:
+    src: templates/console.sh
+    dest: /opt/mariadb/console.sh
+    owner: root
+    group: root
+    mode: u+rwx,g=,o=
+
+- name: Start MariaDB container
+  become: yes
+  command: cd /opt/mariadb/ && ./run.sh
+  ignore_errors: yes

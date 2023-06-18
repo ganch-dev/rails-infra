@@ -1,0 +1,4 @@
+---
+mariadb_image_name: mariadb
+mariadb_version: 10.6.5-focal
+mariadb_image: "{{ mariadb_image_name }}:{{ mariadb_version }}"

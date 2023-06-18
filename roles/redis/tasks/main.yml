@@ -1,0 +1,26 @@
+---
+- name: Create Redis directory
+  file:
+    path: /opt/redis
+    state: directory
+
+- name: Create run.sh script
+  template:
+    src: templates/run.sh
+    dest: /opt/redis/run.sh
+    owner: root
+    group: root
+    mode: u+rwx,g=,o=
+
+- name: Create console.sh script
+  template:
+    src: templates/console.sh
+    dest: /opt/redis/console.sh
+    owner: root
+    group: root
+    mode: u+rwx,g=,o=
+
+- name: Start Redis container
+  become: yes
+  command: cd /opt/redis/ && ./run.sh
+  ignore_errors: yes

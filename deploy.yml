@@ -1,0 +1,6 @@
+---
+- hosts: all
+  tasks:
+    - name: 'Deploying {{ group_names[0] }} to {{ ansible_host }}'
+      become: true
+      command: '{{ group_names[0] }} deploy'

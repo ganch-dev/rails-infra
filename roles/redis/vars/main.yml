@@ -1,0 +1,4 @@
+---
+redis_image_name: redis
+redis_image_version: 6.2.6
+redis_image: "{{ redis_image_name }}:{{ redis_image_version }}"

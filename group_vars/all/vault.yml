@@ -1,0 +1,6 @@
+# Encrypt this file after pasting your passwords here!
+---
+vault_ssh_user_name: sshuser
+vault_ssh_user_password: password
+vault_redis_password: password
+vault_mariadb_password: password
