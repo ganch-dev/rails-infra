@@ -68,8 +68,8 @@
 
 - name: Create service config file for the application
   template:
-    src: templates/rails.yml
-    dest: "/opt/{{ group_names[0] }}/guvnor/rails.yml"
+    src: templates/rails.yaml
+    dest: "/opt/{{ group_names[0] }}/guvnor/rails.yaml"
 
 - name: "Create a simple wrapper for executing Guvnor in `/usr/bin/{{ group_names[0] }}`"
   become: yes

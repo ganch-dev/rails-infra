@@ -18,7 +18,7 @@ rails-01 ansible_host=127.0.0.1
 2. Populate all required variables for the roles
 3. Add and encrypt (with  `ansible-vault`) all secrets from `group_vars/all/vault.yml`
 4. Add `git-crypt` to store your vault password before committing to the repository
-5. Modify the guvnor application config in `roles/guvnor/templates/rails.yml`, read up the docs here: https://guvnor.k.io/service-configuration
+5. Modify the guvnor application config in `roles/guvnor/templates/rails.yaml`, read up the docs here: https://guvnor.k.io/service-configuration
 
 ## Quick Start
 
