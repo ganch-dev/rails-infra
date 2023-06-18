@@ -58,13 +58,13 @@ inventory. It also passes in some extra command line flags which are most likely
 needed. They are each configured with the following environment variables:
 
 - `INVENTORY` — Used to specify the inventory name to use. Effectively adds
-  `-i inventories/$INVENTORY` to the list of Ansible arguments. When this is set
-  to `hosts` the `--ask-become-pass` flag is also passed making Ansible
-  prompt for the sudo password on the target machines.
+  `-i inventories/$INVENTORY` to the list of Ansible arguments.
 - `ANSIBLE_USER` — The user Ansible will use to establish a SSH connection to
   the target machines. This overrides any `ansible_user` vars specified in
   inventory files directly. This is mostly needed for the `hosts` inventory
   where each person have their own unique username.
+- `ASK_BECOME_PASS` — Passes the `--ask-become-pass` flag to the Ansible command to make Ansible
+  prompt for the sudo password on the target machines.
 - `TAGS` — When set to a non-empty string `--tag=$TAGS` will be added to the
   list of Ansible arguments.
 - `ANSIBLE_ARGS` — Allows specifying additional arguments passed to

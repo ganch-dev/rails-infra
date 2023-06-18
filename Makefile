@@ -31,11 +31,7 @@ galaxy-update:
 
 INTERNAL_ANSIBLE_ARGS =
 
-ifeq ($(INVENTORY),production)
-INTERNAL_ANSIBLE_ARGS += --ask-become-pass
-endif
-
-ifeq ($(INVENTORY),staging)
+ifdef ASK_BECOME_PASS
 INTERNAL_ANSIBLE_ARGS += --ask-become-pass
 endif
 
